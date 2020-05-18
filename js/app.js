@@ -47,6 +47,8 @@ todosContainer.addEventListener('click', editTodo);
 todosContainer.addEventListener('click', removeTodo);
 // check completed todos
 todosContainer.addEventListener('click', checkCompletedTodo);
+// filter todos
+filterInput.addEventListener('keyup', filterTodo);
 
 // create todo
 function createTodo(e) {
@@ -104,6 +106,20 @@ function removeTodo(e) {
         store.deleteTodo(id);
         e.target.parentElement.parentElement.remove();
     }
+}
+
+// filter todo
+function filterTodo(e){
+    const ul = document.querySelector('.todo-collection');
+    const lis = ul.querySelectorAll('li.todo-item');
+    const item = e.target.value.toLowerCase();
+    lis.forEach((li) => {
+        if (li.firstElementChild.innerHTML.toLowerCase().indexOf(item) > -1) {
+            li.style.display = '';
+        } else {
+            li.style.display = 'none';
+        } 
+    });
 }
 
 // check completed todo
